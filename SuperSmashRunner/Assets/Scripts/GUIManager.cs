@@ -9,7 +9,7 @@ public class GUIManager : MonoBehaviour
 
     public GameObject upgrading;
     public PlayerMovement player;
-    public Character characterObjective;
+    public CharacterObjectives characterObjective;
     public GameObject charr;
 
     public GameObject objectiveButtons;

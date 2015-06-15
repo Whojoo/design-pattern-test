@@ -5,11 +5,11 @@ public class mainScript : MonoBehaviour
 {
     IObjectives objective = null;
     public GameObject Character;
-    public Character charr;
+    public CharacterObjectives charr;
 
     void Awake()
     {
-        charr = Character.GetComponent<Character>();
+        charr = Character.GetComponent<CharacterObjectives>();
     }
 
     void Update()
