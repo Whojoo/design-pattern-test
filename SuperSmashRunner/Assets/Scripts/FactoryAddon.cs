@@ -54,7 +54,9 @@ public class FactoryAddon : MonoBehaviour
         toReturn.GetComponent<Renderer>().material.color = new Color(50.0f, 0, 0);
 
         toReturn.AddComponent<Rigidbody2D>();
-        toReturn.GetComponent<Rigidbody2D>().fixedAngle = true;
+		//toReturn.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.FreezeRotation; Unity 5.1.0f3 or later
+		toReturn.GetComponent<Rigidbody2D> ().fixedAngle = true;
+		toReturn.AddComponent<EnemyScript> (); //Add the enemy script to the enemy.
 
         return toReturn;
     }

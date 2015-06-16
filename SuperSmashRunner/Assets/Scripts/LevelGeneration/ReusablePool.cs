@@ -74,6 +74,11 @@ public sealed class ReusablePool
         enemyLimit += modifier;
     }
 
+	public int GetActiveEnemyCount()
+	{
+		return activeEnemies.Count;
+	}
+
     private GameObject GetSleepingFrom(LinkedList<GameObject> sleepList)
     {
         //Get and remove first.

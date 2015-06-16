@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour, GameEventListener
 	public ICharacterAddon addon;
     void Awake()
     {
-        GEM = GameEventManager.Instance;
+        GEM = GameEventManager.Instance; 
     }
 
     // Use this for initialization

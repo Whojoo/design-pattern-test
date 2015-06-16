@@ -3,11 +3,9 @@ using System.Collections;
 
 public class KillObjective : IObjectives{
 
-    int enemies;
    public bool ObjectiveProgress()
     {
-        enemies += 1;
-        if (enemies == 20)
+        if (ReusablePool.GetInstance().GetActiveEnemyCount() <= 0)
         {
             return true;
         }
@@ -18,7 +16,8 @@ public class KillObjective : IObjectives{
    public string ObjectiveDescription()
    {
        string killDescription;
-       killDescription = "Kill 20 Enemies";
+		int count = ReusablePool.GetInstance ().GetActiveEnemyCount ();
+		killDescription = "Kill " + count + " Enemies";
        return killDescription;
    }
    

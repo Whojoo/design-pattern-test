@@ -21,7 +21,7 @@ public class GUIManager : MonoBehaviour
     {
         upgrades = upgrading.GetComponent<FactoryAddon>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        characterObjective = charr.GetComponent<Character>();
+		characterObjective = charr.GetComponent<CharacterObjectives>();
         objective = new KillObjective();
         characterObjective.SetObjective(objective);
         //   upgradeGUI.SetActive(false);
