@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using System.Collections;
 
@@ -15,7 +14,8 @@ public class BombAddon : ICharacterAddon
 		bombsource = Resources.Load("Bomb")as GameObject;
 		player=GameObject.FindGameObjectWithTag("Player");
 	}
-	// Update is called once per frame
+
+
 	public void Update()
 	{
 		if (cooldown<=0&&Input.GetKey(KeyCode.X))
@@ -29,4 +29,8 @@ public class BombAddon : ICharacterAddon
 		next.Update ();
 	}
 }
+
+
+
+
 

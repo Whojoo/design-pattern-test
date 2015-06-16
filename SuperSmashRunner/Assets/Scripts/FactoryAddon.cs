@@ -30,18 +30,14 @@ public class FactoryAddon : MonoBehaviour
 		{
 		case AddonType.Bomb:
 			return new BombAddon(addons);
-		//case AddonType.Life:
-			//    return new StatAddon(addons,"Life",amount);
 		case AddonType.Speed:
 			return new StatAddon(addons,"Speed",0.3f);
-		//case AddonType.Defense:
-			//    return new StatAddon(addons,"Defense",amount);
 		default:
 			return new BombAddon(addons);
 			
 		}
-		
 	}
+
 
     public static GameObject CreateEnemy()
     {
