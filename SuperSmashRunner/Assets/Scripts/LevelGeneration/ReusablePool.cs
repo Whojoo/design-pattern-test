@@ -92,6 +92,8 @@ public sealed class ReusablePool
 
     public void Reset()
     {
+        sleepingEnemies.Clear();
+        sleepingPlatforms.Clear();
         enemyLimit = DefaultEnemyLimit;
     }
 

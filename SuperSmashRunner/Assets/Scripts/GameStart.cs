@@ -11,6 +11,7 @@ public class GameStart : MonoBehaviour {
     }
     public void StartGame()
     {
+        ReusablePool.GetInstance().Reset();
         GM.SetGameState(GameState.Game);
         GM.StateSwitch();   
     }
