@@ -15,6 +15,7 @@ public class BombAddon : ICharacterAddon
 		bombsource = Resources.Load("Bomb")as GameObject;
 		player=GameObject.FindGameObjectWithTag("Player");
 	}
+
 	// Update is called once per frame
 	public void Update()
 	{
