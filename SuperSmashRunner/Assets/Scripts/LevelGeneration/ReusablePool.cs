@@ -40,7 +40,8 @@ public sealed class ReusablePool
     public void AddPlatform(Block block)
     {
         //Get the platform from sleeping or create a new one.
-        GameObject platform = sleepingPlatforms.Count > 0 ? GetSleepingFrom(sleepingPlatforms) : FactoryAddon.CreatePlatform();
+        GameObject platform = sleepingPlatforms.Count > 0 ? 
+            GetSleepingFrom(sleepingPlatforms) : FactoryAddon.CreatePlatform();
 
         //Add to active and set to active.
         activePlatforms.AddLast(platform);
@@ -57,7 +58,8 @@ public sealed class ReusablePool
             return false;
 
         //Get a new enemy from either sleeping or new creation.
-        GameObject enemy = sleepingEnemies.Count > 0 ? GetSleepingFrom(sleepingEnemies) : FactoryAddon.CreateEnemy();
+        GameObject enemy = sleepingEnemies.Count > 0 ? 
+            GetSleepingFrom(sleepingEnemies) : FactoryAddon.CreateEnemy();
 
         //Add to active.
         activeEnemies.AddLast(enemy);
@@ -93,21 +95,14 @@ public sealed class ReusablePool
     public void Reset()
     {
         enemyLimit = DefaultEnemyLimit;
+		sleepingEnemies.Clear ();
+		sleepingPlatforms.Clear ();
     }
 
     public void SleepAll()
     {
         SleepList(activePlatforms, sleepingPlatforms);
         SleepList(activeEnemies, sleepingEnemies);
-    }
-
-    public void SleepEnemy(GameObject enemy)
-    {
-        if (activeEnemies.Remove(enemy))
-        {
-            sleepingEnemies.AddLast(enemy);
-            enemy.SetActive(false);
-        }
     }
 
     private void SleepList(LinkedList<GameObject> activeList, LinkedList<GameObject> sleepingList)
@@ -118,6 +113,15 @@ public sealed class ReusablePool
             activeList.RemoveFirst();
             temp.SetActive(false);
             sleepingList.AddLast(temp);
+        }
+    }
+
+    public void SleepEnemy(GameObject enemy)
+    {
+        if (activeEnemies.Remove(enemy))
+        {
+            sleepingEnemies.AddLast(enemy);
+            enemy.SetActive(false);
         }
     }
 

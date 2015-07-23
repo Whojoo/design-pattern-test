@@ -50,20 +50,11 @@ public class Quadtree
         leaves = new List<Block>();
     }
 
-    /// <summary>
-    /// Creates the top node.
-    /// </summary>
-    /// <param name="bounds">The world's size.</param>
     public Quadtree(Rect bounds)
         : this(0, bounds)
     {
     }
 
-    /// <summary>
-    /// Clears this node and all it's child nodes.
-    /// If this is the Top node, then the entire tree gets cleared.
-    /// The Top node is still available for use.
-    /// </summary>
     public void Clear()
     {
         nextIndexForEnemySpawn = 0;
@@ -94,7 +85,41 @@ public class Quadtree
                 toReturn.Add(i);
 
         return toReturn;
-    }
+	}
+	public void Insert(Block block)
+	{
+		//Get the Rect to work with.
+		Rect rect = block.GetRect();
+		
+		//Do we have any child node?
+		if (nodes[0] != null)
+		{
+			foreach (var index in GetIndex(rect))
+			{
+				nodes[index].Insert(block);
+			}
+            return;
+		}
+		
+		//No child, add it to this leaf.
+		leaves.Add(block);
+		
+		//Do we need to split?
+		if (nodes[0] == null && level < MaxLevel && leaves.Count > MaxLeaves)
+		{
+			Split();
+			
+			//For each leave.
+			foreach (var leave in leaves)
+				//Take each index it fits in.
+				foreach (var index in GetIndex(leave.GetRect()))
+					//And insert it.
+					nodes[index].Insert(leave);
+			
+			//And finally clear the leaves list.
+			leaves.Clear();
+		}
+	}
 
     public Block GetNextEnemySpawnBlock()
     {
@@ -114,52 +139,12 @@ public class Quadtree
 
         return toReturn;
     }
-
     private int GetNextIndexForEnemySpawn(int limit)
     {
         int toReturn = nextIndexForEnemySpawn;
         nextIndexForEnemySpawn = (nextIndexForEnemySpawn + 1) % limit;
 
         return toReturn;
-    }
-
-    /// <summary>
-    /// Insert a component in the tree.
-    /// </summary>
-    /// <param name="block"></param>
-    public void Insert(Block block)
-    {
-        //Get the Rect to work with.
-        Rect rect = block.GetRect();
-
-        //Do we have any child node?
-        if (nodes[0] != null)
-        {
-            foreach (var index in GetIndex(rect))
-            {
-                nodes[index].Insert(block);
-                return;
-            }
-        }
-
-        //Object doesnt fit in a child, add it to this leaf.
-        leaves.Add(block);
-
-        //Do we need to split?
-        if (nodes[0] == null && level < MaxLevel && leaves.Count > MaxLeaves)
-        {
-            Split();
-
-            //For each leave.
-            foreach (var leave in leaves)
-                //Take each index it fits in.
-                foreach (var index in GetIndex(leave.GetRect()))
-                    //And insert it.
-                    nodes[index].Insert(leave);
-
-            //And finally clear the leaves list.
-            leaves.Clear();
-        }
     }
 
     /// <summary>
